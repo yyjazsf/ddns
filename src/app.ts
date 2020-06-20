@@ -1,3 +1,6 @@
+import * as path from 'path'
+// eslint-disable-next-line node/no-unpublished-import
+import * as dotenv from 'dotenv'
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 
@@ -6,8 +9,12 @@ import * as json from 'koa-json';
 
 import * as bodyParser from 'koa-bodyparser';
 
-const { PORT } = process.env;
+const result = dotenv.config();
+if (result.error) {
+  throw result.error;
+}
 
+const { PORT } = process.env;
 const app = new Koa();
 const router = new Router();
 
